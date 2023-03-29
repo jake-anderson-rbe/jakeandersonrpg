@@ -3,7 +3,7 @@
 # Class: CS 30
 # Date: March 22, 2023
 # Coders Name: Jake Anderson
-# Version: 002   
+# Version: 003   
 ###############################################################################
 '''
 Current Assignment: Create a text-based RPG
@@ -14,7 +14,8 @@ An RPG set within Campbell
 #----Imports and Global Variables----------------------------------------------
 import sys
 import random
-#-----Functions----------------------------------------------------------------
+import functions
+
 tile = ["Entrance", "Classroom", "Cafeteria", "DeadEnd", "SchoolExit"]
 tiles = {
     tile[0] : {"description" : "you are at the entrance"},
@@ -48,33 +49,9 @@ col = 1
 
 actions = ["walk"]
 
-movements = ["north", "south", "east", "west"]
-
 inventory = []
 
-#----Movement Function----------------------------------------------------------------------
-def movement():
-  global row, col
-  while True:
-    for movement in movements:
-      print(movement)
-    movement_input = input("which direction? ")
-    if movement_input.lower() == "north" and row != 0 :
-      row -= 1
-      break
-    elif movement_input.lower() == "west" and col != 0 :
-      col -= 1
-      break
-    elif movement_input.lower() == "south" and row != 3 :
-      row += 1
-      break
-    elif movement_input.lower() == "east" and col != 3 :
-      col += 1
-      break
-    else:
-      print("that's not valid!")
-    
-  
+ 
 #----Tile Functions----------------------------------------------------------------------
 while True:
   current_location = school_map[row][col]
@@ -89,15 +66,15 @@ while True:
     print("you are in the cafeteria, and eat some food")
   elif current_location == tile[4]:
     print("congrats, you escaped campbell!")
-    sys.exit
+    sys.exit()
   else:
     print("you can't do that!")
 
 #----Action Functions----------------------------------------------------------------------
-  action_input = input("what do you do? ")
+  action_input = input("what do you do? enter guide for inputs: ")
   if action_input.lower() == "walk":
     print("you can go:")
-    movement()
+    functions.movement()
   elif action_input.lower() == "inventory":
     print("you currently have:")
     for item in inventory:
@@ -122,3 +99,14 @@ while True:
           inventory.append(item[4])
     elif current_location != tile[1]:
       print("you can't do that!")
+  elif action_input.lower() == "map":
+    filename = "location.txt"
+    map_text = f"you are currently in {current_location}"
+    print(f"{map_text}")
+    with open(filename, 'w') as file_object:
+      file_object.write(map_text)
+  elif action_input.lower() == "guide":
+    print("you can: walk, search (if in classroom), inventory and quit")
+  elif action_input.lower() == "quit":
+    print("goodbye!")
+    sys.exit()
