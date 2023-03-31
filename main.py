@@ -3,7 +3,7 @@
 # Class: CS 30
 # Date: March 22, 2023
 # Coders Name: Jake Anderson
-# Version: 003   
+# Version: 0.0.3.1   
 ###############################################################################
 '''
 Current Assignment: Create a text-based RPG
@@ -52,7 +52,8 @@ actions = ["walk"]
 inventory = []
 
  
-#----Tile Functions----------------------------------------------------------------------
+#----Tile Code----------------------------------------------------------------------
+# code that defines current location and tile descriptions
 while True:
   current_location = school_map[row][col]
   if current_location == tile[1]:
@@ -70,7 +71,8 @@ while True:
   else:
     print("you can't do that!")
 
-#----Action Functions----------------------------------------------------------------------
+#----Action Code----------------------------------------------------------------------
+# code that defines action inputs
   action_input = input("what do you do? enter guide for inputs: ")
   if action_input.lower() == "walk":
     print("you can go:")

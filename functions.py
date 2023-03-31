@@ -1,6 +1,7 @@
 movements = ["north", "south", "east", "west"]
 #----Movement Function----------------------------------------------------------------------
 def movement():
+  """changes the player's current location when inputs are entered"""
   global row, col
   while True:
     for movement in movements:
