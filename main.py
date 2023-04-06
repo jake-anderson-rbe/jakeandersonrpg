@@ -73,16 +73,17 @@ while True:
 
 #----Action Code----------------------------------------------------------------------
 # code that defines action inputs
-  action_input = input("what do you do? enter guide for inputs: ")
-  if action_input.lower() == "walk":
-    print("you can go:")
-    functions.movement()
-  elif action_input.lower() == "inventory":
-    print("you currently have:")
-    for item in inventory:
-      print(f"{item}")
-  elif action_input.lower() == "search":
-    if current_location == tile[1]:
+  try:
+    action_input = input("what do you do? enter guide for inputs: ")
+    if action_input.lower() == "walk":
+      print("you can go:")
+      functions.movement()
+    elif action_input.lower() == "inventory":
+      print("you currently have:")
+      for item in inventory:
+        print(f"{item}")
+    elif action_input.lower() == "search":
+      if current_location == tile[1]:
         item_chance = random.randint(0,4)
         if item_chance == 0:
           print("you found a pencil!")
@@ -101,14 +102,18 @@ while True:
           inventory.append(item[4])
     elif current_location != tile[1]:
       print("you can't do that!")
-  elif action_input.lower() == "map":
-    filename = "location.txt"
-    map_text = f"you are currently in {current_location}"
-    print(f"{map_text}")
-    with open(filename, 'w') as file_object:
-      file_object.write(map_text)
-  elif action_input.lower() == "guide":
-    print("you can: walk, search (if in classroom), inventory and quit")
-  elif action_input.lower() == "quit":
-    print("goodbye!")
-    sys.exit()
+    elif action_input.lower() == "map":
+      filename = "location.txt"
+      map_text = f"you are currently in {current_location}"
+      print(f"{map_text}")
+      with open(filename, 'w') as file_object:
+        file_object.write(map_text)
+    elif action_input.lower() == "guide":
+      print("you can: walk, search (if in classroom), inventory and quit")
+    elif action_input.lower() == "quit":
+      print("goodbye!")
+      sys.exit()
+  except ValueError:
+    print("you can't do that!")
+  finally:
+    continue
